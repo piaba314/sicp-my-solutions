@@ -1,0 +1,8 @@
+(define (make-monitored f)
+  (let ((counter 0))
+    (define (mf x)
+      (cond ((equal? x 'how-many-calls?) counter)
+            ((equal? x 'reset-count) (set! counter 0))
+            (else (set! counter (+ counter 1))
+                  (f x))))
+    mf))
